@@ -30,6 +30,15 @@ public:
     //// STUDENT CODE
     ////
 
+    ChatBot(ChatBot &chatBot);
+    ChatBot &operator=(ChatBot &chatBot);
+    ChatBot(ChatBot &&chatBot);
+    ChatBot &operator=(ChatBot &&chatBot);
+
+    GraphNode *GetRootNodeHandle() { return _rootNode; }
+    GraphNode *GetCurrentNodeHandle() { return _currentNode; }
+    ChatLogic *GetChatLogicHandle() { return _chatLogic; }
+
     ////
     //// EOF STUDENT CODE
 

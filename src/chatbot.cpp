@@ -21,7 +21,7 @@ ChatBot::ChatBot()
 ChatBot::ChatBot(std::string filename)
 {
     std::cout << "ChatBot Constructor" << std::endl;
-    
+
     // invalidate data handles
     _chatLogic = nullptr;
     _rootNode = nullptr;
@@ -35,7 +35,7 @@ ChatBot::~ChatBot()
     std::cout << "ChatBot Destructor" << std::endl;
 
     // deallocate heap memory
-    if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
+    if(_image != NULL && _image != nullptr) // Attention: wxWidgets used NULL and not nullptr
     {
         delete _image;
         _image = NULL;
@@ -44,6 +44,66 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+
+ChatBot::ChatBot(ChatBot &chatBot)
+{
+    std::cout << "ChatBot Copy Constructor" << std::endl;
+
+    _image = new wxBitmap(chatBot.GetImageHandle()->ConvertToImage());
+    _chatLogic = chatBot.GetChatLogicHandle();
+    _rootNode = chatBot.GetRootNodeHandle();
+    _currentNode = chatBot.GetCurrentNodeHandle();
+}
+
+ChatBot &ChatBot::operator=(ChatBot &chatBot)
+{
+    std::cout << "ChatBot Copy Assignment Constructor" << std::endl;
+
+    if (this == &chatBot) {
+        return *this;
+    }
+
+    if (_image != NULL && _image != nullptr) {
+        delete _image;
+    }
+
+    _image = new wxBitmap(chatBot.GetImageHandle()->ConvertToImage());
+    _chatLogic = chatBot.GetChatLogicHandle();
+    _rootNode = chatBot.GetRootNodeHandle();
+    _currentNode = chatBot.GetCurrentNodeHandle();
+
+    return *this;
+}
+
+ChatBot::ChatBot(ChatBot &&chatBot)
+{
+    std::cout << "ChatBot Move Constructor" << std::endl;
+
+    _image = new wxBitmap(chatBot.GetImageHandle()->ConvertToImage());
+    _chatLogic = chatBot.GetChatLogicHandle();
+    _rootNode = chatBot.GetRootNodeHandle();
+    _currentNode = chatBot.GetCurrentNodeHandle();}
+
+ChatBot &ChatBot::operator=(ChatBot &&chatBot)
+{
+    std::cout << "ChatBot Move Assignment Constructor" << std::endl;
+
+    if (this == &chatBot) {
+        return *this;
+    }
+
+    if (_image != NULL && _image != nullptr) {
+        delete _image;
+        _image = NULL;
+    }
+
+    _image = new wxBitmap(chatBot.GetImageHandle()->ConvertToImage());
+    _chatLogic = chatBot.GetChatLogicHandle();
+    _rootNode = chatBot.GetRootNodeHandle();
+    _currentNode = chatBot.GetCurrentNodeHandle();
+
+    return *this;
+}
 
 ////
 //// EOF STUDENT CODE
