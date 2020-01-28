@@ -45,7 +45,8 @@ public:
     // getters / setters
     void SetCurrentNode(GraphNode *node);
     void SetRootNode(GraphNode *rootNode) { _rootNode = rootNode; }
-    void SetChatLogicHandle(ChatLogic *chatLogic) { _chatLogic = chatLogic; }
+    // void SetChatLogicHandle(ChatLogic *chatLogic) { _chatLogic = chatLogic; }
+    void SetChatLogicHandle(ChatLogic *chatLogic);
     wxBitmap *GetImageHandle() { return _image; }
 
     // communication

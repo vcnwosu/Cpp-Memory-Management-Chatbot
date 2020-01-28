@@ -50,9 +50,9 @@ ChatBot::ChatBot(ChatBot &chatBot)
     std::cout << "ChatBot Copy Constructor" << std::endl;
 
     _image = new wxBitmap(chatBot.GetImageHandle()->ConvertToImage());
-    _chatLogic = chatBot.GetChatLogicHandle();
-    _rootNode = chatBot.GetRootNodeHandle();
-    _currentNode = chatBot.GetCurrentNodeHandle();
+
+    SetRootNode(chatBot.GetRootNodeHandle());
+    SetChatLogicHandle(chatBot.GetChatLogicHandle());
 }
 
 ChatBot &ChatBot::operator=(ChatBot &chatBot)
@@ -68,9 +68,9 @@ ChatBot &ChatBot::operator=(ChatBot &chatBot)
     }
 
     _image = new wxBitmap(chatBot.GetImageHandle()->ConvertToImage());
-    _chatLogic = chatBot.GetChatLogicHandle();
-    _rootNode = chatBot.GetRootNodeHandle();
-    _currentNode = chatBot.GetCurrentNodeHandle();
+
+    SetRootNode(chatBot.GetRootNodeHandle());
+    SetChatLogicHandle(chatBot.GetChatLogicHandle());
 
     return *this;
 }
@@ -80,9 +80,10 @@ ChatBot::ChatBot(ChatBot &&chatBot)
     std::cout << "ChatBot Move Constructor" << std::endl;
 
     _image = new wxBitmap(chatBot.GetImageHandle()->ConvertToImage());
-    _chatLogic = chatBot.GetChatLogicHandle();
-    _rootNode = chatBot.GetRootNodeHandle();
-    _currentNode = chatBot.GetCurrentNodeHandle();}
+
+    SetRootNode(chatBot.GetRootNodeHandle());
+    SetChatLogicHandle(chatBot.GetChatLogicHandle());
+}
 
 ChatBot &ChatBot::operator=(ChatBot &&chatBot)
 {
@@ -98,11 +99,17 @@ ChatBot &ChatBot::operator=(ChatBot &&chatBot)
     }
 
     _image = new wxBitmap(chatBot.GetImageHandle()->ConvertToImage());
-    _chatLogic = chatBot.GetChatLogicHandle();
-    _rootNode = chatBot.GetRootNodeHandle();
-    _currentNode = chatBot.GetCurrentNodeHandle();
+
+    SetRootNode(chatBot.GetRootNodeHandle());
+    SetChatLogicHandle(chatBot.GetChatLogicHandle());
 
     return *this;
+}
+
+void ChatBot::SetChatLogicHandle(ChatLogic *chatLogic)
+{
+    _chatLogic = chatLogic;
+    _chatLogic->SetChatbotHandle(this);
 }
 
 ////
